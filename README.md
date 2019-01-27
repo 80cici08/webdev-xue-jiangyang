@@ -1,6 +1,12 @@
-# WebdevJiangyangCs5610
+# WebAppMaker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4
+
+###Something about the author
+I'm a graduate student of 2019 spring at Northeastern. Before that, I've worked in HUAWEI for three years as a test engineer. Our major product is Software Defined Network(SDN) controller, an application that controls network devices and manages flow control. I participated in the web testing(mainly Restful API testing) and performance testing of the product. We also wrote automated testing cases with Ruby. 
+
+###Live instance of the project
+https://webdev-xue-jiangyang.herokuapp.com/
 
 ## Development server
 
@@ -25,3 +31,4 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
