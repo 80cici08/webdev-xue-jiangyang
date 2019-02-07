@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <!-- Meta tags for making website for mobile-->
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta charset="UTF-8">
+
+  <title>Website Edit</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- STYLE sheet comes after all the libraries are loaded. Document style-->
+
+</head>
+<body>
+<!--Header-->
+<div class="navbar navbar-dark cl-blue-navbar fixed-top">
+  <div class="container-fluid">
+    <div class="col-4 d-none d-sm-block">
+      <a class="navbar-text" href="website-list.html"><i class="fas fa-angle-left"></i></a>
+      <a class="navbar-brand ml-3" href="#">Websites</a>
+      <a class="navbar-text float-right" href="website-new.html"><i class="fas fa-plus"></i></a>
+    </div>
+    <div class="col-8">
+      <a class="navbar-brand" href="#">Edit Website</a>
+      <a class="navbar-text float-right" href="website-list.html"><i class="fas fa-check"></i></a>
+    </div>
+  </div>
+</div>
+
+<!--Content-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4 d-none d-sm-block">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <a href="page-list.html">Address Book App</a>
+          <a href="website-edit.html" class="float-right"><span class="fas fa-cog nudge-right-10px"></span></a>
+        </li>
+        <li class="list-group-item">
+          <a href="page-list.html">Biogging App</a>
+          <a href="website-edit.html" class="float-right"><span class="fas fa-cog nudge-right-10px"></span></a>
+        </li>
+        <li class="list-group-item">
+          <a href="page-list.html">Script Testing App</a>
+          <a href="website-edit.html" class="float-right"><span class="fas fa-cog nudge-right-10px"></span></a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-8">
+      <form>
+        <div class="form-group">
+          <label for="website-name">Website Name</label>
+          <input type="text" class="form-control" id="website-name" placeholder="Blogger">
+        </div>
+        <div class="form-group">
+          <label for="website-description">Website Description</label>
+          <textarea id="website-description" class="form-control" rows="5"
+                    placeholder="Blog is a blog-publishing service."></textarea>
+        </div>
+        <a class="btn btn-danger  btn-block" href="website-list.html">Delete</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="navbar navbar-dark cl-blue-navbar fixed-bottom">
+  <div class="container-fluid">
+    <a class="navbar-text ml-auto" href="profile.html"><i class="fas fa-user"></i></a>
+  </div>
+</div>
+
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
