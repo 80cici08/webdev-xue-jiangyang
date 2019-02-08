@@ -23,6 +23,9 @@ a:hover{
   background-color: #337ab7;
 }
 
+.cl-text-blue {
+  color:#337ab7;
+}
 .cl-text-white{
   color: #fff;
 }
@@ -36,7 +39,7 @@ a:hover{
 }
 
 .cl-icon-padding {
-  padding-left: 250px;
+  padding-left: 10px;
   padding-right: 10px;
 }
 
@@ -101,3 +104,4 @@ a:hover{
   z-index: 100;
   position: relative;
 }
+
