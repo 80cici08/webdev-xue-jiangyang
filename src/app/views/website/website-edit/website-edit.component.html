@@ -1,0 +1,64 @@
+<!--Header-->
+<div class="navbar navbar-dark cl-blue-navbar fixed-top">
+  <div class="container-fluid">
+    <div class="col-1 ">
+      <a class="navbar-text" routerLink="/user/{{developerId}}/website"><i class="fas fa-angle-left fontawsome_icon"></i></a>
+    </div>
+    <div class="col-3 d-none d-sm-block">
+      <a class="navbar-brand ml-3" href="#">Websites</a>
+      <a class="navbar-text float-right" routerLink="/user/{{developerId}}/website/new"><i class="fas fa-plus fontawsome_icon"></i></a>
+    </div>
+    <div class="col-8">
+      <a class="navbar-brand" href="#">Edit Website</a>
+      <a class="navbar-text float-right" (click)="editWebsite()" href="javascript:void(0);"><i class="fas fa-check fontawsome_icon"></i></a>
+    </div>
+  </div>
+</div>
+
+<!--Content-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-4 col-md-4 d-none d-sm-block">
+      <ul class="list-group list-group-flush" *ngFor="let website of websites">
+        <li class="list-group-item">
+          <a routerLink="/user/{{developerId}}/website/{{website._id}}/page">{{ website.name }}</a>
+          <a routerLink="/user/{{developerId}}/website/{{website._id}}" class="float-right"><span class="fas fa-cog nudge-right-10px fontawsome_icon"></span></a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xl-8 col-md-8">
+      <div *ngIf="errorFlag" class="alert alert-danger">{{ errorMsg }}</div>
+      <form>
+        <div class="form-group">
+          <label for="website-name">Website Name</label>
+          <input type="text"
+                 class="form-control"
+                 id="website-name"
+                 name="name"
+                 placeholder="Enter website name."
+                 [(ngModel)]="website.name" required #websiteName="ngModel">
+        </div>
+        <span class="form-text text-muted" *ngIf="!websiteName.valid && websiteName.touched">
+          Please enter website name!
+        </span>
+        <div class="form-group">
+          <label for="website-description">Website Description</label>
+          <textarea id="website-description"
+                    name="description"
+                    class="form-control"
+                    rows="5"
+                    placeholder="Enter website description."
+                    [(ngModel)]="website.description"></textarea>
+        </div>
+        <a class="btn btn-danger  btn-block" (click)="deleteWebsite()">Delete</a>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="navbar navbar-dark cl-blue-navbar fixed-bottom">
+  <div class="container-fluid">
+    <a class="navbar-text ml-auto" routerLink="/user/{{developerId}}"><i class="fas fa-user fontawsome_icon"></i></a>
+  </div>
+</div>

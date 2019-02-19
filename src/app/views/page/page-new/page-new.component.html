@@ -1,0 +1,45 @@
+<!--Header-->
+<div class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-text" routerLink="/user/{{userId}}/website/{{websiteId}}/page"><i
+      class="fas fa-angle-left fontawsome_icon"></i></a>
+    <a class="navbar-brand ml-2" href="#"> New Page</a>
+    <a class="navbar-text ml-auto" (click)="createPage()"><i class="fas fa-check fontawsome_icon"></i></a>
+  </div>
+</div>
+
+<!--Content-->
+<div class="container">
+  <div *ngIf="errorFlag" class="alert alert-danger">{{ errorMsg }}</div>
+  <form>
+    <div class="form-group">
+      <label for="page-name">Name</label>
+      <input type="text"
+             class="form-control"
+             id="page-name"
+             name="name"
+             placeholder="Page Name"
+             [(ngModel)]="page.name" required #pageName="ngModel">
+    </div>
+    <span class="form-text text-muted" *ngIf="!pageName.valid && pageName.touched">
+          Please enter page name!
+    </span>
+
+    <div class="form-group">
+      <label for="page-title">Title</label>
+      <input type="text"
+             class="form-control"
+             id="page-title"
+             name="description"
+             placeholder="Page Title"
+             [(ngModel)]="page.description">
+    </div>
+  </form>
+</div>
+
+<!-- Footer -->
+<div class="navbar navbar-light bg-light fixed-bottom">
+  <div class="container-fluid">
+    <a class="navbar-text ml-auto" routerLink="/user/{{userId}}"><i class="fas fa-user fontawsome_icon"></i></a>
+  </div>
+</div>

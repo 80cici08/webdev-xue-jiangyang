@@ -1,0 +1,49 @@
+<!--Header-->
+<div class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-text" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"><i class="fas fa-angle-left fontawsome_icon"></i></a>
+    <a class="navbar-brand ml-2" href="#"> Edit Widget</a>
+    <a class="navbar-text ml-auto" (click)="updateWidget()"><i class="fas fa-check fontawsome_icon"></i></a>
+  </div>
+</div>
+
+<!--Content-->
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="heading-name">Name</label>
+      <input type="text"
+             class="form-control"
+             id="heading-name"
+             name="name"
+             placeholder="Name"
+             [(ngModel)]="widget.name">
+    </div>
+    <div class="form-group">
+      <label for="heading-text">Text</label>
+      <input type="text"
+             class="form-control"
+             id="heading-text"
+             name="text"
+             placeholder="Text"
+             [(ngModel)]="widget.text">
+    </div>
+    <div class="form-group">
+      <label for="heading-size">Size</label>
+      <input type="text"
+             class="form-control"
+             id="heading-size"
+             name="size"
+             placeholder="size"
+             [(ngModel)]="widget.size">
+    </div>
+  </form>
+  <a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>
+</div>
+
+<!-- Footer -->
+<div class="navbar navbar-light bg-light fixed-bottom">
+  <div class="container-fluid">
+    <a class="navbar-text ml-auto" routerLink="/user/{{userId}}"><i class="fas fa-user fontawsome_icon"></i></a>
+  </div>
+</div>
