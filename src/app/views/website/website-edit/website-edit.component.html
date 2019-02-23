@@ -19,10 +19,10 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xl-4 col-md-4 d-none d-sm-block">
-      <ul class="list-group list-group-flush" *ngFor="let website of websites">
+      <ul class="list-group list-group-flush" *ngFor="let wb of websites">
         <li class="list-group-item">
-          <a routerLink="/user/{{developerId}}/website/{{website._id}}/page">{{ website.name }}</a>
-          <a routerLink="/user/{{developerId}}/website/{{website._id}}" class="float-right"><span class="fas fa-cog nudge-right-10px fontawsome_icon"></span></a>
+          <a routerLink="/user/{{developerId}}/website/{{wb._id}}/page">{{ wb.name }}</a>
+          <a routerLink="/user/{{developerId}}/website/{{wb._id}}" class="float-right"><span class="fas fa-cog nudge-right-10px fontawsome_icon"></span></a>
         </li>
       </ul>
     </div>
@@ -36,9 +36,9 @@
                  id="website-name"
                  name="name"
                  placeholder="Enter website name."
-                 [(ngModel)]="website.name" required #websiteName="ngModel">
+                 [(ngModel)]="websiteName" required #websitename="ngModel">
         </div>
-        <span class="form-text text-muted" *ngIf="!websiteName.valid && websiteName.touched">
+        <span class="form-text text-muted" *ngIf="!websitename.valid && websitename.touched">
           Please enter website name!
         </span>
         <div class="form-group">

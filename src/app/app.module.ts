@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './views/user/login/login.component';
 import { RegisterComponent } from './views/user/register/register.component';
 import { ProfileComponent } from './views/user/profile/profile.component';
-import { FormsModule}  from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { WebsiteListComponent } from './views/website/website-list/website-list.component';
@@ -26,6 +26,7 @@ import {UserService} from './services/user.service.client';
 import {WebsiteService} from './services/website.service.client';
 import {PageService} from './services/page.service.client';
 import {WidgetService} from './services/widget.service.client';
+import { ChangeBgColorDirective } from './directives/change-bg-color.directive';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import {WidgetService} from './services/widget.service.client';
     WidgetChooserComponent,
     WidgetHeaderComponent,
     WidgetImageComponent,
-    WidgetYoutubeComponent
+    WidgetYoutubeComponent,
+    ChangeBgColorDirective
   ],
   imports: [
     BrowserModule,

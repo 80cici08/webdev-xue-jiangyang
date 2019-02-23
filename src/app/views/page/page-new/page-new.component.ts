@@ -9,10 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class PageNewComponent implements OnInit {
 
-  page: {
-    name: String,
-    description: String
-  };
+  page: any;
   userId: String;
   websiteId: String;
   errorFlag: boolean;

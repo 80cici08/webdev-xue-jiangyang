@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WebsiteService} from '../../../services/website.service.client';
+import {Website} from '../../../models/website.model.client';
 
 @Component({
   selector: 'app-website-edit',
@@ -9,10 +10,12 @@ import {WebsiteService} from '../../../services/website.service.client';
   styleUrls: ['./website-edit.component.css']
 })
 export class WebsiteEditComponent implements OnInit {
-  website: any;
-  websites = [{}];
+  websites: Website[];
   developerId: String;
   websiteId: String;
+  website: Website;
+  websiteName: String;
+  // websiteDesc: String;
   errorFlag: boolean;
   errorMsg = 'Please enter website name.';
 
@@ -25,16 +28,18 @@ export class WebsiteEditComponent implements OnInit {
       this.developerId = params.uid;
       this.websiteId = params.wid;
       this.website = this.websiteService.findWebsiteById(this.websiteId);
+      this.websiteName = this.website.name;
+      // console.log(this.website);
     });
 
     this.websites = this.websiteService.findWebsiteByUser(this.developerId);
   }
 
   editWebsite() {
-    console.log("----"+this.website.name+"----");
     if (this.website.name === '') {
       this.errorFlag = true;
     } else {
+      this.website.name = this.websiteName;
       this.websiteService.updateWebsite(this.websiteId, this.website);
       this.router.navigate(['/user', this.developerId, 'website']);
     }

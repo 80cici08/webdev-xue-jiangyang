@@ -2,27 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {NgForm} from '@angular/forms';
-
-
-export class User {
-  _id: String;
-  username: String;
-  password: String;
-
-  firstName: String;
-  lastName: String;
-  email: String;
-
-  constructor(_id, username, password, firstName, lastName, email) {
-    this._id = _id;
-    this.username = username;
-    this.password = password;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-  }
-
-}
+import {User} from '../../../models/user.model.client';
 
 
 @Component({
@@ -35,7 +15,8 @@ export class ProfileComponent implements OnInit {
   errorFlag: boolean;
   errorMsg = 'Invalid input, please check!';
 
-  user;
+  user: User;
+  userId: String;
   @ViewChild('f') profileForm: NgForm;
 
   constructor(private userService: UserService,
@@ -44,15 +25,17 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRouter.params.subscribe(params => {
-      this.user = this.userService.findUserById(params.uid);
+      this.userId = params['uid'];
+      this.user = this.userService.findUserById(this.userId);
+      // console.log(this.user);
     });
+
   }
 
   updateUser() {
     if (!!this.profileForm.valid) {
       this.userService.updateUser(this.user._id, this.user);
       this.router.navigate(['/user', this.user._id, 'website']);
-      console.log(this.userService.users);
     } else {
       this.errorFlag = true;
     }

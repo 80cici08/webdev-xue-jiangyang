@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
+import {Website} from '../../../models/website.model.client';
 
 @Component({
   selector: 'app-website-new',
@@ -10,10 +12,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class WebsiteNewComponent implements OnInit {
   websiteName: String;
   websiteDesc: String;
-  websites: any;
+  websites: Website[];
   developerId: String;
+
   errorFlag: boolean;
   errorMsg = 'Please enter website name.';
+
+  @ViewChild('f') newWebsiteForm: NgForm;
 
   constructor(private websiteService: WebsiteService,
               private router: Router,
@@ -27,6 +32,10 @@ export class WebsiteNewComponent implements OnInit {
   }
 
   createWebsite() {
+    this.websiteName = this.newWebsiteForm.value.websiteName;
+    this.websiteDesc = this.newWebsiteForm.value.websiteDesc;
+    const website: Website = new Website('', this.websiteName, this.developerId, this.websiteDesc);
+
     if (this.websiteName === undefined) {
       this.errorFlag = true;
     } else {

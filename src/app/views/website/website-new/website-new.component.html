@@ -32,7 +32,7 @@
     </div>
     <div class="col-xl-8 col-md-8">
       <div *ngIf="errorFlag" class="alert alert-danger">{{ errorMsg }}</div>
-      <form>
+      <form #f="ngForm">
         <div class="form-group">
           <label for="websiteName">Website Name</label>
           <input type="text"
@@ -40,7 +40,7 @@
                  id="websiteName"
                  name="websiteName"
                  placeholder="name"
-                 [(ngModel)]="websiteName" required #websitename="ngModel">
+                 ngModel required #websitename="ngModel">
         </div>
         <span class="form-text text-muted" *ngIf="!websitename.valid && websitename.touched">
           Please enter website name!
@@ -51,9 +51,9 @@
           <textarea type="text"
                     class="form-control"
                     id="websiteDesc"
-                    name="description"
+                    name="websiteDesc"
                     placeholder="description"
-                    [(ngModel)]="websiteDesc"></textarea>
+                    ngModel></textarea>
         </div>
       </form>
     </div>

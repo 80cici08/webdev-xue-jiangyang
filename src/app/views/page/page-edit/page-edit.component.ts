@@ -25,7 +25,7 @@ export class PageEditComponent implements OnInit {
       this.websiteId = params.wid;
       this.pageId = params.pid;
     });
-    this.page = this.pageService.fidnPageById(this.pageId);
+    this.page = this.pageService.findPageById(this.pageId);
   }
 
   deletePage() {

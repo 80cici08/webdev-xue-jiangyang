@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'webdev-jiangyang-cs5610';
+  color = 'green';
 }

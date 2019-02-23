@@ -1,31 +1,14 @@
 import {Injectable} from '@angular/core';
+import {Widget} from '../models/widget.model.client';
 
 @Injectable()
 export class WidgetService {
   widgets = [
-
-    {'_id': '123', 'widgetType': 'HEADING', 'pageId': '321', 'size': 2, 'text': 'GIZMODO'},
-
-    {'_id': '234', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
-
-    {
-      '_id': '345', 'widgetType': 'IMAGE', 'pageId': '321', 'width': '100%',
-
-      'url': 'http://i2.cdn.cnn.com/cnnnext/dam/assets/170604130220-41-london-bridge-incident-0604-gallery-exlarge-169.jpg'
-    },
-
-    {'_id': '456', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'},
-
-    {'_id': '567', 'widgetType': 'HEADING', 'pageId': '321', 'size': 4, 'text': 'Lorem ipsum'},
-
-    {
-      '_id': '678', 'widgetType': 'YOUTUBE', 'pageId': '321', 'width': '100%',
-
-      'url': 'https://www.youtube.com/embed/APexI9Zb6iE'
-    },
-
-    {'_id': '789', 'widgetType': 'HTML', 'pageId': '321', 'text': '<p>Lorem ipsum</p>'}
-
+    new Widget('123', 'HEADING', '321', '2', 'GIZMODO', '', ''),
+    new Widget('234', 'HEADING', '321', '4', 'Lorem ipsum', '', ''),
+    new Widget('345', 'IMAGE', '321', '', '', '100%', 'http://i2.cdn.cnn.com/cnnnext/dam/assets/170604130220-41-london-bridge-incident-0604-gallery-exlarge-169.jpg'),
+    new Widget('456', 'HEADING', '321', '3', 'Lorem ipsum', '', ''),
+    new Widget('789', 'YOUTUBE', '321', '', '','100%', 'https://www.youtube.com/embed/APexI9Zb6iE'),
   ];
 
   createWidget(pageId, widget: any) {

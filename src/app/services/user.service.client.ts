@@ -1,15 +1,13 @@
 import {Injectable} from '@angular/core';
+import {User} from '../models/user.model.client';
 
 @Injectable()
 export class UserService {
-  users = [
-    {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder" },
-
-    {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley" },
-
-    {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia" },
-
-    {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi" }
+  users: User[] = [
+    new User('123', 'alice', 'alice', 'Alice', 'Wonder', ''),
+    new User('234', 'bob', 'bob', 'Bob', 'Marley', ''),
+    new User('345', 'charly', 'charly', 'Charly', 'Garcia', ''),
+    new User('456', 'jannunzi', 'jannunzi', 'Jose', 'Annunzi', ''),
   ];
 
   createUser(user) {
@@ -19,11 +17,9 @@ export class UserService {
   }
 
   findUserById(userId) {
-    for (const user of this.users) {
-      if (user._id === userId) {
-        return user;
-      }
-    }
+    return this.users.find(user => {
+      return user._id === userId;
+    });
   }
 
   findUserByUsername(username) {

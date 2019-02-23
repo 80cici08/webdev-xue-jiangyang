@@ -13,6 +13,8 @@ import {WidgetListComponent} from './views/widget/widget-list/widget-list.compon
 import {WidgetChooserComponent} from './views/widget/widget-chooser/widget-chooser.component';
 import {WidgetEditComponent} from './views/widget/widget-edit/widget-edit.component';
 
+import {ChangeBgColorDirective} from './directives/change-bg-color.directive';
+
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},

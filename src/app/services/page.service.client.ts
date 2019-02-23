@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
+import {Page} from '../models/page.model.client';
 
 @Injectable()
 export class PageService {
   pages = [
-    {'_id': '321', 'name': 'Post 1', 'websiteId': '456', 'description': 'Lorem'},
+    new Page('321', 'Post 1', '123', 'Lorem'),
+    new Page('324', 'Post 2', '123', 'Lorem'),
+    new Page('432', 'Post 3', '234', 'Lorem'),
+    new Page('543', 'Post 4', '234', 'Lorem'),
 
-    {'_id': '432', 'name': 'Post 2', 'websiteId': '456', 'description': 'Lorem'},
-
-    {'_id': '543', 'name': 'Post 3', 'websiteId': '456', 'description': 'Lorem'}
   ];
 
   createPage(websiteId, page) {
@@ -24,7 +25,7 @@ export class PageService {
     return found;
   }
 
-  fidnPageById(pageId) {
+  findPageById(pageId) {
     for (const page of this.pages) {
       if (page._id === pageId) {
         return page;

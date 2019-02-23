@@ -1,4 +1,4 @@
-<div class="navbar navbar-dark cl-blue-navbar fixed-top">
+ <div class="navbar navbar-dark cl-blue-navbar fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Profile</a>
     <a (click)="updateUser()" class="navbar-text ml-auto" ><i class="fas fa-check fontawsome_icon cl-text-white"></i></a>
@@ -11,12 +11,12 @@
   <form (ngSubmit)="updateUser()" #f="ngForm">
     <div class="form-group">
       <label for="username">Username</label>
-      <input [(ngModel)]="user.username"
-             class="form-control"
+      <input class="form-control"
              type="text"
              id="username"
              name="username"
              placeholder="Username"
+             [(ngModel)]="user.username"
              required #username="ngModel">
     </div>
     <span class="form-text text-muted" *ngIf="!username.valid && username.touched">
@@ -25,12 +25,12 @@
 
     <div class="form-group">
       <label for="email">Email address</label>
-      <input [(ngModel)]="user.email"
-             class="form-control"
+      <input class="form-control"
              type="email"
              id="email"
              name="email"
              placeholder="sample@google.com"
+             [(ngModel)]="user.email"
              email #email="ngModel">
     </div>
     <span class="form-text text-muted" *ngIf="!email.valid && email.touched">
@@ -44,7 +44,7 @@
              type="text"
              id="firstname"
              name="firstname"
-             placeholder="Alice">
+             placeholder="FirstName">
     </div>
     <div class="form-group">
       <label for="lastname">Last Name</label>
@@ -53,7 +53,7 @@
              type="text"
              id="lastname"
              name="lastname"
-             placeholder="Wonderland">
+             placeholder="LastName">
     </div>
     <div class="form-group">
       <button [disabled]="!f.valid" class="btn btn-primary btn-block" type="submit">Websites</button>
