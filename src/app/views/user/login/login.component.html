@@ -3,28 +3,32 @@
   <hr>
   <h2>Login Form</h2>
   <div *ngIf="errorFlag" class="alert alert-danger">{{ errorMsg }}</div>
-  <form (ngSubmit)="login()" #f="ngForm">
+  <form (ngSubmit)="login()" #f="ngForm" class="needs-validation">
     <div class="form-group">
       <input class="form-control"
+             [class.is-invalid]="!username.valid && username.touched"
              type="text"
              name="username"
              placeholder="Username"
              ngModel required #username="ngModel">
+      <small class="form-text text-danger" *ngIf="!username.valid && username.touched">
+        Please enter username.
+      </small>
     </div>
-    <span class="form-text text-muted" *ngIf="!username.valid && username.touched">
-      Please enter username!
-    </span>
+
 
     <div class="form-group">
       <input class="form-control"
+             [class.is-invalid]="!password.valid && password.touched"
              type="password"
              name="password"
              placeholder="Password"
              ngModel required #password="ngModel">
+      <small class="form-text text-danger" *ngIf="!password.valid && password.touched">
+        Please enter password.
+      </small>
     </div>
-    <span class="form-text text-muted" *ngIf="!password.valid && password.touched">
-      Please enter password!
-    </span>
+
 
     <div class="form-group">
       <button [disabled]="!f.valid" class="btn btn-primary btn-block" type="submit">Login</button>

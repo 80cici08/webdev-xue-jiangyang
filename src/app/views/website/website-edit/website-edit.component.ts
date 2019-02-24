@@ -14,8 +14,6 @@ export class WebsiteEditComponent implements OnInit {
   developerId: String;
   websiteId: String;
   website: Website;
-  websiteName: String;
-  // websiteDesc: String;
   errorFlag: boolean;
   errorMsg = 'Please enter website name.';
 
@@ -27,19 +25,17 @@ export class WebsiteEditComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.developerId = params.uid;
       this.websiteId = params.wid;
-      this.website = this.websiteService.findWebsiteById(this.websiteId);
-      this.websiteName = this.website.name;
-      // console.log(this.website);
+      const tmp: Website = this.websiteService.findWebsiteById(this.websiteId);
+      this.website = new Website(tmp._id, tmp.name, tmp.developerId, tmp.description);
     });
 
     this.websites = this.websiteService.findWebsiteByUser(this.developerId);
   }
 
   editWebsite() {
-    if (this.website.name === '') {
+    if (this.website.name === undefined || this.website.name === '') {
       this.errorFlag = true;
     } else {
-      this.website.name = this.websiteName;
       this.websiteService.updateWebsite(this.websiteId, this.website);
       this.router.navigate(['/user', this.developerId, 'website']);
     }

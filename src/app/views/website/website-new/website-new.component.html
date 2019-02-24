@@ -37,14 +37,15 @@
           <label for="websiteName">Website Name</label>
           <input type="text"
                  class="form-control"
+                 [class.is-invalid]="!websitename.valid && websitename.touched"
                  id="websiteName"
                  name="websiteName"
                  placeholder="name"
                  ngModel required #websitename="ngModel">
+        <small class="form-text text-danger" *ngIf="!websitename.valid && websitename.touched">
+          Please enter website name.
+        </small>
         </div>
-        <span class="form-text text-muted" *ngIf="!websitename.valid && websitename.touched">
-          Please enter website name!
-        </span>
 
         <div class="form-group">
           <label for="websiteDesc">Website Description</label>

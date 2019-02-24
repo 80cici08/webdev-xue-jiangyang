@@ -15,14 +15,15 @@
       <label for="page-name">Name</label>
       <input type="text"
              class="form-control"
+             [class.is-invalid]="!pageName.valid && pageName.touched"
              id="page-name"
              name="name"
              placeholder="Page Name"
              [(ngModel)]="page.name" required #pageName="ngModel">
     </div>
-    <span class="form-text text-muted" *ngIf="!pageName.valid && pageName.touched">
-          Please enter page name!
-    </span>
+    <small class="form-text text-danger" *ngIf="!pageName.valid && pageName.touched">
+          Please enter page name.
+    </small>
 
     <div class="form-group">
       <label for="page-title">Title</label>

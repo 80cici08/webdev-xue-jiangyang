@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PageService} from '../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Page} from '../../../models/page.model.client';
 
 @Component({
   selector: 'app-page-edit',
@@ -8,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./page-edit.component.css']
 })
 export class PageEditComponent implements OnInit {
-  page: any;
+  page: Page;
   userId: String;
   websiteId: String;
   pageId: String;
@@ -25,7 +26,8 @@ export class PageEditComponent implements OnInit {
       this.websiteId = params.wid;
       this.pageId = params.pid;
     });
-    this.page = this.pageService.findPageById(this.pageId);
+    const copy: Page = this.pageService.findPageById(this.pageId);
+    this.page = new Page(copy._id, copy.name, copy.websiteId, copy.title);
   }
 
   deletePage() {

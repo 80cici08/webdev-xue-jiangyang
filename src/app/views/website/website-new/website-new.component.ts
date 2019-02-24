@@ -34,11 +34,11 @@ export class WebsiteNewComponent implements OnInit {
   createWebsite() {
     this.websiteName = this.newWebsiteForm.value.websiteName;
     this.websiteDesc = this.newWebsiteForm.value.websiteDesc;
-    const website: Website = new Website('', this.websiteName, this.developerId, this.websiteDesc);
 
-    if (this.websiteName === undefined) {
+    if (this.websiteName === undefined || this.websiteName === '') {
       this.errorFlag = true;
     } else {
+      const website: Website = new Website('', this.websiteName, this.developerId, this.websiteDesc);
       this.websiteService.createWebsite(this.developerId,{name: this.websiteName, description: this.websiteDesc});
       this.router.navigate(['user', this.developerId, 'website']);
     }
