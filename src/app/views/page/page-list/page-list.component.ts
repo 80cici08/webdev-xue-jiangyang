@@ -22,7 +22,12 @@ export class PageListComponent implements OnInit {
       this.websiteId = params.wid;
     });
 
-    this.pages = this.pageService.findPageByWebsiteId(this.websiteId);
+    this.pageService.findPageByWebsiteId(this.websiteId)
+      .subscribe(
+        (data: Page[]) => {
+          this.pages = data;
+        }
+      );
   }
 
 }

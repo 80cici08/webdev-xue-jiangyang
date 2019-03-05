@@ -26,8 +26,21 @@ export class WidgetListComponent implements OnInit {
       this.websiteId = params.wid;
       this.pageId = params.pid;
     });
-    this.widgets = this.widgetService.findWidgetsByPageId(this.pageId);
-    console.log(this.widgets);
+    this.widgetService.findWidgetsByPageId(this.pageId)
+      .subscribe(
+        data => {
+          this.widgets = data;
+        }
+      );
+  }
+
+  // receiving the emitted event
+  reorderWidgets(indexes) {
+    // call widget service function to update widget as per index
+    this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pageId)
+      .subscribe(
+        (data) => console.log(data)
+      );
   }
 
 }

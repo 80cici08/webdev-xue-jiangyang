@@ -28,7 +28,12 @@ export class WebsiteNewComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.developerId = params.uid;
     });
-    this.websites = this.websiteService.findWebsiteByUser(this.developerId);
+    this.websiteService.findWebsiteByUser(this.developerId)
+      .subscribe(
+        (data: Website[]) => {
+          this.websites = data;
+        }
+      );
   }
 
   createWebsite() {
@@ -39,8 +44,12 @@ export class WebsiteNewComponent implements OnInit {
       this.errorFlag = true;
     } else {
       const website: Website = new Website('', this.websiteName, this.developerId, this.websiteDesc);
-      this.websiteService.createWebsite(this.developerId,{name: this.websiteName, description: this.websiteDesc});
-      this.router.navigate(['user', this.developerId, 'website']);
+      this.websiteService.createWebsite(this.developerId, website)
+        .subscribe(
+          data => {
+            this.router.navigate(['user', this.developerId, 'website']);
+          }
+        );
     }
   }
 

@@ -25,26 +25,48 @@ export class WebsiteEditComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       this.developerId = params.uid;
       this.websiteId = params.wid;
-      const tmp: Website = this.websiteService.findWebsiteById(this.websiteId);
-      this.website = new Website(tmp._id, tmp.name, tmp.developerId, tmp.description);
+      // const tmp: Website = this.websiteService.findWebsiteById(this.websiteId);
+      // this.website = new Website(tmp._id, tmp.name, tmp.developerId, tmp.description);
     });
 
-    this.websites = this.websiteService.findWebsiteByUser(this.developerId);
+    this.websiteService.findWebsiteById(this.websiteId)
+      .subscribe(
+        (data: Website) => {
+          this.website = data;
+        }
+      )
+
+    this.websiteService.findWebsiteByUser(this.developerId)
+      .subscribe(
+        (data: Website[]) => {
+          this.websites = data;
+        }
+      );
   }
 
   editWebsite() {
     if (this.website.name === undefined || this.website.name === '') {
       this.errorFlag = true;
     } else {
-      this.websiteService.updateWebsite(this.websiteId, this.website);
-      this.router.navigate(['/user', this.developerId, 'website']);
+      this.websiteService.updateWebsite(this.websiteId, this.website)
+        .subscribe(
+          data => {
+            this.router.navigate(['/user', this.developerId, 'website']);
+          }
+        );
     }
   }
 
   deleteWebsite() {
-    this.websiteService.deleteWebsite(this.websiteId);
-    this.router.navigate(['/user', this.developerId, 'website']);
-    // console.log(this.websiteService.websites);
+    this.websiteService.deleteWebsite(this.websiteId)
+      .subscribe(
+        data => {
+          this.router.navigate(['/user', this.developerId, 'website']);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
 }

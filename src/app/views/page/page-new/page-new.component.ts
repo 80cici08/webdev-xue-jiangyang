@@ -34,8 +34,12 @@ export class PageNewComponent implements OnInit {
     if (this.page.name === undefined || this.page.name === '') {
       this.errorFlag = true;
     } else {
-      this.pageService.createPage(this.websiteId, this.page);
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+      this.pageService.createPage(this.websiteId, this.page)
+        .subscribe(
+          data => {
+            this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+          }
+        );
     }
   }
 

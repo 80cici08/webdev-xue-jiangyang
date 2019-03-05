@@ -21,21 +21,34 @@ export class ProfileComponent implements OnInit {
 
   constructor(private userService: UserService,
               private activatedRouter: ActivatedRoute,
-              private router: Router) { this.errorFlag = false; }
+              private router: Router) {
+    this.errorFlag = false;
+    // this.user = new User('111', 'alice', 'alice', 'alice', 'alice', 'alice@alice');
+  }
 
   ngOnInit() {
     this.activatedRouter.params.subscribe(params => {
       this.userId = params['uid'];
-      this.user = this.userService.findUserById(this.userId);
-      // console.log(this.user);
+      this.userService.findUserById(this.userId)
+        .subscribe(
+          (data: User) => {
+          this.user = data;
+        });
     });
-
   }
 
   updateUser() {
     if (!!this.profileForm.valid) {
-      this.userService.updateUser(this.user._id, this.user);
-      this.router.navigate(['/user', this.user._id, 'website']);
+      this.userService.updateUser(this.userId, this.user)
+        .subscribe(
+          data => {
+            this.user = data;
+            this.router.navigate(['/user', this.user._id, 'website']);
+          },
+          error => {
+            this.errorFlag = true;
+          }
+        );
     } else {
       this.errorFlag = true;
     }

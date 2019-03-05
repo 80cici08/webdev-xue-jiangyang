@@ -26,21 +26,36 @@ export class PageEditComponent implements OnInit {
       this.websiteId = params.wid;
       this.pageId = params.pid;
     });
-    const copy: Page = this.pageService.findPageById(this.pageId);
-    this.page = new Page(copy._id, copy.name, copy.websiteId, copy.title);
+
+    this.pageService.findPageById(this.pageId)
+      .subscribe(
+        (data: Page) => {
+          this.page = data;
+        }
+      );
+    // const copy: Page = this.pageService.findPageById(this.pageId);
+    // this.page = new Page(copy._id, copy.name, copy.websiteId, copy.title);
   }
 
   deletePage() {
-    this.pageService.deletePage(this.pageId);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+    this.pageService.deletePage(this.pageId)
+      .subscribe(
+        data => {
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+        }
+      );
   }
 
   editPage() {
     if (this.page.name === undefined || this.page.name === '') {
       this.errorFlag = true;
     } else {
-      this.pageService.updatePage(this.pageId, this.page);
-      this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+      this.pageService.updatePage(this.pageId, this.page)
+        .subscribe(
+          (data: Page) => {
+            this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+          }
+        );
     }
   }
 

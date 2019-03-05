@@ -8,6 +8,7 @@ import { LoginComponent } from './views/user/login/login.component';
 import { RegisterComponent } from './views/user/register/register.component';
 import { ProfileComponent } from './views/user/profile/profile.component';
 import { FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { ViewChild } from '@angular/core';
 import { WebsiteListComponent } from './views/website/website-list/website-list.component';
@@ -27,6 +28,9 @@ import {WebsiteService} from './services/website.service.client';
 import {PageService} from './services/page.service.client';
 import {WidgetService} from './services/widget.service.client';
 import { ChangeBgColorDirective } from './directives/change-bg-color.directive';
+import {SortableDirective} from '../../server/directives/sortable.directive';
+// import { SortableDirective } from './directives/sortable.directive';
+
 
 
 @NgModule({
@@ -48,12 +52,14 @@ import { ChangeBgColorDirective } from './directives/change-bg-color.directive';
     WidgetHeaderComponent,
     WidgetImageComponent,
     WidgetYoutubeComponent,
-    ChangeBgColorDirective
+    ChangeBgColorDirective,
+    SortableDirective
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [UserService, WebsiteService, PageService, WidgetService],
   bootstrap: [AppComponent]

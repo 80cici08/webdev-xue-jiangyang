@@ -21,8 +21,8 @@
     <div class="col-xl-4 col-md-4 d-none d-sm-block">
       <ul class="list-group list-group-flush" *ngFor="let wb of websites">
         <li class="list-group-item">
-          <a routerLink="/user/{{developerId}}/website/{{wb._id}}/page">{{ wb.name }}</a>
-          <a routerLink="/user/{{developerId}}/website/{{wb._id}}" class="float-right"><span class="fas fa-cog nudge-right-10px fontawsome_icon"></span></a>
+          <a [routerLink]="['../', wb._id, 'page']">{{ wb.name }}</a>
+          <a [routerLink]="['../', wb._id]" class="float-right"><span class="fas fa-cog nudge-right-10px fontawsome_icon"></span></a>
         </li>
       </ul>
     </div>

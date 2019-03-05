@@ -8,7 +8,7 @@
 </div>
 
 <!--Content-->
-<div class="container cl-container-padding">
+<div class="container cl-container-padding" appSortable (newIndexes)="reorderWidgets($event)">
   <div *ngFor="let widget of widgets">
     <div [ngSwitch]="widget.widgetType">
 

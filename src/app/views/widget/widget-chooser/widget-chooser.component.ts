@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -14,8 +14,8 @@ export class WidgetChooserComponent implements OnInit {
   widget: any;
   defaultWidgetValues =
     {
-      'HEADING': {widgetType: 'HEADING', 'size' : 1},
-      'IMAGE': {widgetType: 'IMAGE', width: '100%'},
+      'HEADING': {widgetType: 'HEADING', 'size': 1},
+      'IMAGE': {widgetType: 'IMAGE', width: '100%', url:''},
       'YOUTUBE': {widgetType: 'YOUTUBE', width: '100%'},
       'HTML': {widgetType: 'HTML'},
       'TEXT': {widgetType: 'TEXT', placeholder: ''}
@@ -23,7 +23,8 @@ export class WidgetChooserComponent implements OnInit {
 
   constructor(private widgetService: WidgetService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
@@ -35,9 +36,14 @@ export class WidgetChooserComponent implements OnInit {
 
   createWidget(widgetType) {
     this.widget = this.defaultWidgetValues[widgetType];
-    this.widget = this.widgetService.createWidget(this.pageId, this.widget);
-    // console.log(this.widgetService.widgets);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widget._id]);
+    this.widgetService.createWidget(this.pageId, this.widget)
+      .subscribe(
+        data => {
+          this.widget = data;
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget', this.widget._id]);
+        }
+      );
+
   }
 
 }

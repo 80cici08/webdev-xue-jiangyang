@@ -6,7 +6,7 @@
   <form (ngSubmit)="login()" #f="ngForm" class="needs-validation">
     <div class="form-group">
       <input class="form-control"
-             [class.is-invalid]="!username.valid && username.touched"
+             [ngClass]="{'is-invalid':!username.valid && username.touched}"
              type="text"
              name="username"
              placeholder="Username"

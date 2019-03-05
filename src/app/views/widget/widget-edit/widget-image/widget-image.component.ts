@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-widget-image',
@@ -14,9 +15,12 @@ export class WidgetImageComponent implements OnInit {
   widgetId: String;
   widget: any;
 
+  baseUrl = environment.baseUrl;
+
   constructor(private widgetService: WidgetService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
@@ -25,17 +29,31 @@ export class WidgetImageComponent implements OnInit {
       this.pageId = params.pid;
       this.widgetId = params.wgid;
     });
-    this.widget = this.widgetService.findWidgetById(this.widgetId);
+    this.widgetService.findWidgetById(this.widgetId)
+      .subscribe(
+        data => {
+          this.widget = data;
+        }
+      );
   }
 
   updateWidget() {
-    this.widgetService.updateWidget(this.widgetId, this.widget);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    this.widgetService.updateWidget(this.widgetId, this.widget)
+      .subscribe(
+        data => {
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+        }
+      );
   }
 
   deleteWidget() {
-    this.widgetService.deleteWidget(this.widgetId);
-    this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+    this.widgetService.deleteWidget(this.widgetId)
+      .subscribe(
+        data => {
+          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
+
+        }
+      );
   }
 
 }
