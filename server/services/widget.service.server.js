@@ -34,8 +34,8 @@ module.exports = function (app) {
     var size = myFile.size;
     var mimetype = myFile.mimetype;
     widget = getWidgetById(widgetId);
-    widget.url = '/uploads/' + filename;
-    var callbackUrl = "/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+    widget.url = filename;
+    var callbackUrl = "/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget";
     res.redirect(callbackUrl);
   }
 
