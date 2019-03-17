@@ -50,7 +50,8 @@ module.exports = function (app) {
       }
     }
     widget.url = 'uploads/' + filename;
-    var callbackUrl = "https://webdev-xue-jiangyang.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+    var callbackUrl = "http://localhost:3200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+    // var callbackUrl = "https://webdev-xue-jiangyang.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
     res.redirect(callbackUrl);
 
   }
