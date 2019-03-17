@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WidgetService} from '../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Widget} from '../../../../models/widget.model.client';
 
 @Component({
   selector: 'app-widget-youtube',
@@ -12,11 +13,12 @@ export class WidgetYoutubeComponent implements OnInit {
   websiteId: String;
   pageId: String;
   widgetId: String;
-  widget: any;
+  widget: Widget;
 
   constructor(private widgetService: WidgetService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
+    this.widget = new Widget('','YOUTUBE', '');
   }
 
   ngOnInit() {

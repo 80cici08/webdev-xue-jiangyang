@@ -5,8 +5,11 @@ module.exports = function (app) {
     {"_id": "543", "name": "Post 3", "websiteId": "123", "description": "Lorem"}
   ];
 
-  // create page
   app.post("/api/website/:websiteId/page", createPage);
+  app.get("/api/website/:websiteId/page", findAllPagesForWebsite);
+  app.get("/api/page/:pageId", findPageById);
+  app.put("/api/page/:pageId", updatePage);
+  app.delete("/api/page/:pageId", deletePage);
 
   function createPage(req, res) {
     var page = req.body;
@@ -14,11 +17,9 @@ module.exports = function (app) {
     page._id = Math.random().toString().substr(2, 9);
     page.websiteId = websiteId;
     pages.push(page);
-    res.send(page);
+    res.json(page);
   }
 
-  // find all pages for website
-  app.get("/api/website/:websiteId/page", findAllPagesForWebsite);
 
   function findAllPagesForWebsite(req, res) {
     var websiteId = req.params.websiteId;
@@ -26,25 +27,21 @@ module.exports = function (app) {
       return ele.websiteId === websiteId;
     });
 
-    res.send(found);
+    res.json(found);
   }
 
-  // find page by Id
-  app.get("/api/page/:pageId", findPageById);
 
   function findPageById(req, res) {
     var pageId = req.params.pageId;
     for (const page of pages) {
       if (page._id === pageId) {
-        res.send(page);
+        res.json(page);
         return;
       }
     }
-    res.send({});
+    res.json({});
   }
 
-  // update page
-  app.put("/api/page/:pageId", updatePage);
 
   function updatePage(req, res) {
     var pageId = req.params.pageId;
@@ -53,25 +50,23 @@ module.exports = function (app) {
     for (let x = 0; x < pages.length; x++) {
       if (pages[x]._id === pageId) {
         pages[x] = newPage;
-        res.send(newPage);
+        res.json(newPage);
         return;
       }
     }
-    res.send({});
+    res.json({});
   }
 
-  // delete page
-  app.delete("/api/page/:pageId", deletePage);
 
   function deletePage(req, res) {
     var pageId = req.params.pageId;
     for (let x = 0; x < pages.length; x++) {
       if (pages[x]._id === pageId) {
         pages.splice(x, 1);
-        res.send({message: "ok"});
+        res.json({message: "ok"});
         return;
       }
     }
-    res.send({});
+    res.json({});
   }
 }

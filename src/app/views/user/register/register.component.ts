@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
           },
           error => {
             this.errorFlag = true;
-          }
+          },
         );
     }
   }

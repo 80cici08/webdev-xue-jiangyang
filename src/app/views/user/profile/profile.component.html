@@ -1,14 +1,14 @@
  <div class="navbar navbar-dark cl-blue-navbar fixed-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Profile</a>
-    <a (click)="updateUser()" class="navbar-text ml-auto" ><i class="fas fa-check fontawsome_icon cl-text-white"></i></a>
+    <a (click)="onUpdate()" href="javascript:void(0);" class="navbar-text ml-auto" ><i class="fas fa-check fontawsome_icon cl-text-white"></i></a>
   </div>
 </div>
 
 
 <div class="container">
   <div *ngIf="errorFlag" class="alert alert-danger">{{ errorMsg }}</div>
-  <form (ngSubmit)="updateUser()" #f="ngForm">
+  <form (ngSubmit)="onGoToWebsites()" #f="ngForm">
     <div class="form-group">
       <label for="username">Username</label>
       <input class="form-control"

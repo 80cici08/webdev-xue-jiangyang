@@ -15,9 +15,15 @@ module.exports = function (app) {
     {"_id": "789", "widgetType": 'HTML', "pageId": "321", "text": "<p>Lorem ipsum</p>"}
   ];
   var multer = require('multer');// npm install multer --save
-  var upload = multer({dest: __dirname + '/../../src/assets/uploads'});
+  var upload = multer({dest: __dirname + '../../src/assets/uploads'});
 
   app.post("/api/upload", upload.single('myFile'), uploadImage);
+  app.post('/api/page/:pageId/widget', createWidget);
+  app.get('/api/page/:pageId/widget', findAllWidgetsForPage);
+  app.get('/api/widget/:widgetId', findWidgetById);
+  app.put('/api/widget/:widgetId', updateWidget);
+  app.delete('/api/widget/:widgetId', deleteWidget);
+  app.put("/api/page/:pageId/widget", reorderWidgets);
 
   function uploadImage(req, res) {
     var widgetId = req.body.widgetId;
@@ -33,10 +39,20 @@ module.exports = function (app) {
     var destination = myFile.destination; // folder where file is saved to
     var size = myFile.size;
     var mimetype = myFile.mimetype;
-    widget = getWidgetById(widgetId);
-    widget.url = filename;
-    var callbackUrl = "/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget";
+    // widget = getWidgetById(widgetId);
+    // widget.url = filename;
+    var widget = {url: "assets/uploads/" + filename};
+
+    var widget;
+    for (var i = 0; i < widgets.length; i++) {
+      if (widgets[i]._id === widgetId) {
+        widget = widgets[i];
+      }
+    }
+    widget.url = 'uploads/' + filename;
+    var callbackUrl = "http://localhost:3200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
     res.redirect(callbackUrl);
+
   }
 
   function getWidgetById(widgetId) {
@@ -48,7 +64,6 @@ module.exports = function (app) {
   }
 
   // create widget
-  app.post('/api/page/:pageId/widget', createWidget);
 
   function createWidget(req, res) {
     var widget = req.body;
@@ -56,36 +71,33 @@ module.exports = function (app) {
     widget._id = Math.random().toString().substr(2, 9);
     widget.pageId = pageId;
     widgets.push(widget);
-    res.send(widget);
+    res.json(widget);
   }
 
   // find all widgets for page
-  app.get('/api/page/:pageId/widget', findAllWidgetsForPage);
 
   function findAllWidgetsForPage(req, res) {
     var pageId = req.params.pageId;
     const found = widgets.filter(ele => {
       return ele.pageId === pageId;
     });
-    res.send(found);
+    res.json(found);
   }
 
   // find widget by id
-  app.get('/api/widget/:widgetId', findWidgetById);
 
   function findWidgetById(req, res) {
     var widgetId = req.params.widgetId;
     for (const widget of widgets) {
       if (widget._id === widgetId) {
-        res.send(widget);
+        res.json(widget);
         return;
       }
     }
-    res.send({});
+    res.json({});
   }
 
   // update widget
-  app.put('/api/widget/:widgetId', updateWidget);
 
   function updateWidget(req, res) {
     var widgetId = req.params.widgetId;
@@ -94,30 +106,28 @@ module.exports = function (app) {
     for (let x = 0; x < widgets.length; x++) {
       if (widgets[x]._id === widgetId) {
         widgets[x] = newWidget;
-        res.send(newWidget);
+        res.json(newWidget);
         return;
       }
     }
-    res.send({});
+    res.json({});
   }
 
   // delete widget
-  app.delete('/api/widget/:widgetId', deleteWidget);
 
   function deleteWidget(req, res) {
     var widgetId = req.params.widgetId;
     for (let x = 0; x < widgets.length; x++) {
       if (widgets[x]._id === widgetId) {
         widgets.splice(x, 1);
-        res.send({message: "ok"});
+        res.json({message: "ok"});
         return;
       }
     }
-    res.send({});
+    res.json({});
   }
 
   // reorder widgets
-  app.put("/api/page/:pageId/widget", reorderWidgets);
 
   function reorderWidgets(req, res) {
     var pageId = req.params.pageId;
@@ -145,7 +155,7 @@ module.exports = function (app) {
         }
       }
     }
-    res.send({"message": "ok"});
+    res.json({"message": "ok"});
 
 
   }

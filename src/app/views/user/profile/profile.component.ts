@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
               private activatedRouter: ActivatedRoute,
               private router: Router) {
     this.errorFlag = false;
-    // this.user = new User('111', 'alice', 'alice', 'alice', 'alice', 'alice@alice');
+    this.user = new User('111', 'alice', 'alice', 'alice', 'alice', 'alice@alice');
   }
 
   ngOnInit() {
@@ -37,13 +37,12 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  updateUser() {
+  onUpdate() {
     if (!!this.profileForm.valid) {
       this.userService.updateUser(this.userId, this.user)
         .subscribe(
           data => {
             this.user = data;
-            this.router.navigate(['/user', this.user._id, 'website']);
           },
           error => {
             this.errorFlag = true;
@@ -52,6 +51,11 @@ export class ProfileComponent implements OnInit {
     } else {
       this.errorFlag = true;
     }
+  }
+
+  onGoToWebsites() {
+    this.onUpdate();
+    this.router.navigate(['/user', this.user._id, 'website']);
   }
 
 }

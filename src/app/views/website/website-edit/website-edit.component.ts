@@ -19,7 +19,10 @@ export class WebsiteEditComponent implements OnInit {
 
   constructor(private websiteService: WebsiteService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) { this.errorFlag = false; }
+              private activatedRoute: ActivatedRoute) {
+    this.errorFlag = false;
+    this.website = new Website('','','','');
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {

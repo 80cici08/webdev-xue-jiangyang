@@ -1,17 +1,17 @@
 // Get the dependencies
 
 const express = require('express');
-const app = express();
 const path = require('path');
 const http = require('http');
-
-
 const bodyParser = require('body-parser');
-app.use(bodyParser.json());
+const app = express();
+
+// install, load, and configure body parser module
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Point static path to dist -- For building -- REMOVE
-app.use(express.static(path.join(__dirname, 'dist/webdev-jiangyang-cs5610')));
+app.use(express.static(path.join(__dirname, "dist/webdev-jiangyang-cs5610")));
 
 // CORS
 app.use(function(req, res, next) {
@@ -24,27 +24,14 @@ app.use(function(req, res, next) {
 const port = process.env.PORT || '3200';
 app.set('port', port);
 
+require("./server/app")(app);
+app.get('*', function (req, res) {
+  console.log("*****");
+  res.sendFile(path.join(__dirname, 'dist/webdev-jiangyang-cs5610/index.html'));
+});
+
 
 // Create HTTP server
 const server = http.createServer(app);
-server.listen( port , () => console.log('Running on port 3200'));
+server.listen( port , () => console.log('Running on port ' + port));
 
-/*var dbServer = require('./test-mongodb/app');
-dbServer(app);*/
-
-//require('./test-mongodb/app')(app);
-
-
-// For Build: Catch all other routes and return the index file -- BUILDING
-/*
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'dist/index.html'));
-});
-*/
-
-
-//
-// require('./server/app')(app);
-
-
-require('./server/app')(app);

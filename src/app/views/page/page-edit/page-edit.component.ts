@@ -18,7 +18,10 @@ export class PageEditComponent implements OnInit {
 
   constructor(private pageService: PageService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) { this.errorFlag = false; }
+              private activatedRoute: ActivatedRoute) {
+    this.errorFlag = false;
+    this.page = new Page('', '', '', '');
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {

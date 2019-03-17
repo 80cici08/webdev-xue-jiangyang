@@ -7,19 +7,31 @@ module.exports = function (app) {
     {_id: '456', name: 'Apple', developerId: '234', description: 'Lorem'},
   ];
 
-  // create website
   app.post("/api/user/:userId/website", createWebsite);
+  app.get("/api/user/:userId/website", findAllWebsiteForUser);
+  app.get("/api/website/:websiteId", findWebsiteById);
+  app.put("/api/website/:websiteId", updateWebsite);
+  app.delete("/api/website/:websiteId", deleteWebsite);
+
+  // create website
   function createWebsite(req, res) {
     var website = req.body;
     var userId = req.params.userId;
+
+    // for (var i = 0; i < websites.length; i++) {
+    //   if (websites[i].developerId === userId && websites[i].name === website.name) {
+    //     res.status(404).send("This website is already exist.");
+    //     return;
+    //   }
+    // }
+
     website._id = Math.random().toString().substr(2, 9);
     website.developerId = userId;
     websites.push(website);
-    res.send(website);
+    res.json(website);
   }
 
   // find all website
-  app.get("/api/user/:userId/website", findAllWebsiteForUser);
   function findAllWebsiteForUser(req, res) {
     var userId = req.params.userId;
 
@@ -27,25 +39,23 @@ module.exports = function (app) {
       return ele.developerId === userId;
     });
 
-    res.send(found);
+    res.json(found);
   }
 
   // find website by id
-  app.get("/api/website/:websiteId", findWebsiteById);
   function findWebsiteById(req, res){
     var websiteId =req.params.websiteId;
 
     for (const website of websites) {
       if (website._id === websiteId) {
-        res.send(website);
+        res.json(website);
         return;
       }
     }
-    res.send({});
+    res.json({});
   }
 
   // update website
-  app.put("/api/website/:websiteId", updateWebsite);
   function updateWebsite(req, res) {
     var websiteId = req.params.websiteId;
     var newWebsite = req.body;
@@ -53,25 +63,24 @@ module.exports = function (app) {
     for (let x = 0; x < websites.length; x++) {
       if (websites[x]._id === websiteId) {
         websites[x] = newWebsite;
-        res.send(newWebsite);
+        res.json(newWebsite);
         return;
       }
     }
-    res.send({});
+    res.json({});
   }
 
   // delete website
-  app.delete("/api/website/:websiteId", deleteWebsite);
   function deleteWebsite(req, res) {
     var websiteId = req.params.websiteId;
     for (let x = 0; x < websites.length; x++) {
       if (websites[x]._id === websiteId) {
         websites.splice(x, 1);
-        res.send({message: "ok"});
+        res.json({message: "ok"});
         return;
       }
     }
-    res.send({});
+    res.json({});
   }
 
 }
