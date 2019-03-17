@@ -15,7 +15,7 @@ module.exports = function (app) {
     {"_id": "789", "widgetType": 'HTML', "pageId": "321", "text": "<p>Lorem ipsum</p>"}
   ];
   var multer = require('multer');// npm install multer --save
-  var upload = multer({dest: __dirname + '../../src/assets/uploads'});
+  var upload = multer({dest: __dirname + '/../../src/assets/uploads'});
 
   app.post("/api/upload", upload.single('myFile'), uploadImage);
   app.post('/api/page/:pageId/widget', createWidget);

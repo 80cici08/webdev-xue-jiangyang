@@ -52,7 +52,6 @@ module.exports = function (app) {
 
   // find user by username
   function findUserByUsername(req, res) {
-    console.log("service.server: find user by cred...");
     var username = req.query["username"];
     var user = null;
 

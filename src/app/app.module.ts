@@ -29,7 +29,6 @@ import {PageService} from './services/page.service.client';
 import {WidgetService} from './services/widget.service.client';
 import { ChangeBgColorDirective } from './directives/change-bg-color.directive';
 import {SortableDirective} from './directives/sortable.directive';
-// import { SortableDirective } from './directives/sortable.directive';
 
 
 
