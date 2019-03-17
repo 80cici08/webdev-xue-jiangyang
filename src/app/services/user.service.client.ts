@@ -32,7 +32,6 @@ export class UserService {
   }
 
   findUserByCredentials(username, password) {
-    console.log("service.client: find user by cred...");
     return this._http.get<User>(this.baseUrl + '/api/user?username=' + username + '&password=' + password);
   }
 
