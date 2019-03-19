@@ -32,8 +32,12 @@ export class LoginComponent implements OnInit {
     this.userService.findUserByCredentials(this.username, this.password)
       .subscribe(
         (data: any) => {
-          this.errorFlag = false;
-          this.router.navigate(['user', data._id]);
+          if (data) {
+            this.errorFlag = false;
+            this.router.navigate(['user', data._id]);
+          } else {
+            this.errorFlag = true;
+          }
         },
         (error: any) => {
           this.errorFlag = true;
