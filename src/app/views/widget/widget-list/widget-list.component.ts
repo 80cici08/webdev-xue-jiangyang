@@ -3,6 +3,7 @@ import {WidgetService} from '../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import {Widget} from '../../../models/widget.model.client';
+import {PageService} from '../../../services/page.service.client';
 
 @Component({
   selector: 'app-widget-list',
@@ -16,6 +17,7 @@ export class WidgetListComponent implements OnInit {
   widgets: Widget[];
 
   constructor(private widgetService: WidgetService,
+              private pageService: PageService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               public sanitizer: DomSanitizer) { }
@@ -26,21 +28,21 @@ export class WidgetListComponent implements OnInit {
       this.websiteId = params.wid;
       this.pageId = params.pid;
     });
-    this.widgetService.findWidgetsByPageId(this.pageId)
+    this.pageService.findPageById(this.pageId)
       .subscribe(
-        data => {
-          this.widgets = data;
+        (data: any) => {
+          this.widgets = data.widgets;
         }
       );
   }
 
   // receiving the emitted event
   reorderWidgets(indexes) {
-    console.log('indexes:' + indexes);
+    // console.log('indexes:' + indexes);
     // call widget service function to update widget as per index
     this.widgetService.reorderWidgets(indexes.startIndex, indexes.endIndex, this.pageId)
       .subscribe(
-        (data) => console.log(data)
+        (data: any) => console.log(data)
       );
   }
 

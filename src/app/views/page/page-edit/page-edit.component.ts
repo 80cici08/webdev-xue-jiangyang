@@ -20,7 +20,7 @@ export class PageEditComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute) {
     this.errorFlag = false;
-    this.page = new Page('', '', '', '');
+    this.page = new Page('', '', '');
   }
 
   ngOnInit() {

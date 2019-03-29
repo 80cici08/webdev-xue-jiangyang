@@ -21,7 +21,7 @@ export class WebsiteEditComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute) {
     this.errorFlag = false;
-    this.website = new Website('','','','');
+    this.website = new Website('', '','');
   }
 
   ngOnInit() {

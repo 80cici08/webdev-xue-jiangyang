@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
               private activatedRouter: ActivatedRoute,
               private router: Router) {
     this.errorFlag = false;
-    this.user = new User('111', 'alice', 'alice', 'alice', 'alice', 'alice@alice');
+    this.user = new User('alice', 'alice', 'alice', 'alice', 'alice@alice');
   }
 
   ngOnInit() {

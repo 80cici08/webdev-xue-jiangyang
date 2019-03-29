@@ -17,7 +17,7 @@ export class WidgetChooserComponent implements OnInit {
       'HEADING': {widgetType: 'HEADING', 'size': 1},
       'IMAGE': {widgetType: 'IMAGE', width: '100%', url:''},
       'YOUTUBE': {widgetType: 'YOUTUBE', width: '100%'},
-      'HTML': {widgetType: 'HTML'},
+      'HTML': {widgetType: 'HTML', text:''},
       'TEXT': {widgetType: 'TEXT', placeholder: ''}
     };
 

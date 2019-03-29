@@ -53,7 +53,6 @@ export class WidgetImageComponent implements OnInit {
       .subscribe(
         data => {
           this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page', this.pageId, 'widget']);
-
         }
       );
   }

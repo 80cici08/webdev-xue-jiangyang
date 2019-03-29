@@ -1,9 +1,11 @@
 <!--Header-->
 <div class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
-    <a class="navbar-text" routerLink="/user/{{userId}}/website/{{websiteId}}/page"><i class="fas fa-angle-left fontawsome_icon"></i></a>
+    <a class="navbar-text" routerLink="/user/{{userId}}/website/{{websiteId}}/page"><i
+      class="fas fa-angle-left fontawsome_icon"></i></a>
     <a class="navbar-brand ml-2" href="javascript:void(0);"> Widgets</a>
-    <a class="navbar-text ml-auto" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new"><i class="fas fa-plus fontawsome_icon"></i></a>
+    <a class="navbar-text ml-auto" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget/new"><i
+      class="fas fa-plus fontawsome_icon"></i></a>
   </div>
 </div>
 
@@ -12,34 +14,47 @@
   <div *ngFor="let widget of widgets">
     <div [ngSwitch]="widget.widgetType">
 
-        <div class="jga-widget-tool">
-          <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]">
-            <span class="fas fa-cog"> </span>
-          </a>
-          <span class="fas fa-bars"></span>
+      <div class="jga-widget-tool">
+        <a [routerLink]="['/user', userId, 'website', websiteId, 'page', pageId, 'widget', widget._id]">
+          <span class="fas fa-cog"> </span>
+        </a>
+        <span class="fas fa-bars"></span>
+      </div>
+
+      <div *ngSwitchCase="'HEADING'">
+        <div [ngSwitch]="widget.size">
+          <h1 *ngSwitchCase="1">{{widget.text}}</h1>
+          <h2 *ngSwitchCase="2">{{widget.text}}</h2>
+          <h3 *ngSwitchCase="3">{{widget.text}}</h3>
+          <h4 *ngSwitchCase="4">{{widget.text}}</h4>
+          <h5 *ngSwitchCase="5">{{widget.text}}</h5>
+          <h6 *ngSwitchCase="6">{{widget.text}}</h6>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'YOUTUBE'" class="embed-responsive embed-responsive-16by9 youtube-widget">
+        <iframe width="widget.width" height="360" [src]='sanitizer.bypassSecurityTrustResourceUrl(widget.url)'
+                frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <div *ngSwitchCase="'IMAGE'">
+        <img class="img-responsive img-rounded cl-widget-images" [src]="widget.url" width="widget.width"/>
+      </div>
+
+      <div *ngSwitchCase="'HTML'" [innerHTML]="widget.text"></div>
+
+      <div *ngSwitchCase="'TEXT'">
+        <div *ngIf="widget.formatted">
+          <quill-editor [(ngModel)]="widget.text" name="text"></quill-editor>
         </div>
 
-        <div *ngSwitchCase="'HEADING'">
-          <div [ngSwitch]="widget.size">
-            <h1 *ngSwitchCase="1">{{widget.text}}</h1>
-            <h2 *ngSwitchCase="2">{{widget.text}}</h2>
-            <h3 *ngSwitchCase="3">{{widget.text}}</h3>
-            <h4 *ngSwitchCase="4">{{widget.text}}</h4>
-            <h5 *ngSwitchCase="5">{{widget.text}}</h5>
-            <h6 *ngSwitchCase="6">{{widget.text}}</h6>
-          </div>
-        </div>
+        <input *ngIf="!widget.formatted && (!widget.rows || widget.rows===1)"
+               placeholder="{{widget.placeholder}}" class="form-control"/>
 
-        <div *ngSwitchCase="'YOUTUBE'" class="embed-responsive embed-responsive-16by9">
-          <iframe width="widget.width" height="360" [src]='sanitizer.bypassSecurityTrustResourceUrl(widget.url)' frameborder="0" allowfullscreen></iframe>
-        </div>
-
-        <div *ngSwitchCase="'IMAGE'">
-          <img class="img-responsive img-rounded cl-widget-images" [src] = "widget.url" width= "widget.width"/>
-        </div>
-
-        <div *ngSwitchCase="'HTML'" [innerHTML]="widget.text"></div>
-
+        <textarea *ngIf="!widget.formatted && (widget.rows > 1)"
+                  rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                  class="form-control">{{widget.text}}</textarea>
+      </div>
     </div>
   </div>
 

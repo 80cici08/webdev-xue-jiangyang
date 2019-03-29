@@ -1,0 +1,59 @@
+<!--Header-->
+<div class="navbar navbar-light bg-light fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-text" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"><i
+      class="fas fa-angle-left fontawsome_icon"></i></a>
+    <a class="navbar-brand ml-2" href="javascript:void(0);"> Edit Widget</a>
+    <a class="navbar-text ml-auto" (click)="updateWidget()" href="javascript:void(0);"><i
+      class="fas fa-check fontawsome_icon"></i></a>
+  </div>
+</div>
+
+<!--Content-->
+<div class="container">
+    <div class="form-group">
+      <label for="text-name">Name</label>
+      <input type="text"
+             class="form-control"
+             id="text-name"
+             placeholder="Name"
+             [(ngModel)]="widget.name">
+    </div>
+    <div class="form-group">
+      <label for="text-text">Text</label>
+      <input type="text"
+             class="form-control"
+             id="text-text"
+             placeholder="Text"
+             [(ngModel)]="widget.text">
+    </div>
+    <div class="form-group">
+      <label for="text-rows">Rows</label>
+      <input type="text"
+             class="form-control"
+             id="text-rows"
+             [(ngModel)]="widget.rows">
+    </div>
+    <div class="form-group">
+      <label for="text-placeholder">Placeholder</label>
+      <input type="text"
+             class="form-control"
+             id="text-placeholder"
+             [(ngModel)]="widget.placeholder">
+    </div>
+
+    <div class="input-group">
+      <input type="text" readonly value="Formatted" class="form-control"/>
+      <span class="input-group-addon">
+        <input [(ngModel)]="widget.formatted" type="checkbox"/>
+      </span>
+    </div>
+  <a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>
+</div>
+
+<!-- Footer -->
+<div class="navbar navbar-light bg-light fixed-bottom">
+  <div class="container-fluid">
+    <a class="navbar-text ml-auto" routerLink="/user/{{userId}}"><i class="fas fa-user fontawsome_icon"></i></a>
+  </div>
+</div>

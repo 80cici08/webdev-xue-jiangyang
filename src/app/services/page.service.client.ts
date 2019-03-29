@@ -26,7 +26,7 @@ export class PageService {
   }
 
   findPageById(pageId) {
-    return this._http.get<Page>(this.baseUrl + '/api/page/' + pageId);
+    return this._http.get(this.baseUrl + '/api/page/' + pageId);
   }
 
   updatePage(pageId, page) {

@@ -43,7 +43,7 @@ export class WebsiteNewComponent implements OnInit {
     if (this.websiteName === undefined || this.websiteName === '') {
       this.errorFlag = true;
     } else {
-      const website: Website = new Website('', this.websiteName, this.developerId, this.websiteDesc);
+      const website: Website = new Website(this.websiteName, this.developerId, this.websiteDesc);
       this.websiteService.createWebsite(this.developerId, website)
         .subscribe(
           data => {
