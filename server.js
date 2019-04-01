@@ -33,8 +33,8 @@ app.get('*', function (req, res) {
 const server = http.createServer(app);
 server.listen( port , () => console.log('Running on port ' + port));
 
-var connectionString = 'mongodb://localhost:27017/webdev';
-// var connectionString = 'mongodb://admin:admin0@ds213715.mlab.com:13715/heroku_ts5hd0n5'
+// var connectionString = 'mongodb://localhost:27017/webdev';
+var connectionString = 'mongodb://admin:admin0@ds213715.mlab.com:13715/heroku_ts5hd0n5'
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 const client = mongoose.connect(connectionString, {useNewUrlParser: true});

@@ -44,16 +44,22 @@ module.exports = function (app) {
     // widget.url = filename;
     var widget = {url: "assets/uploads/" + filename};
 
-    var widget;
-    for (var i = 0; i < widgets.length; i++) {
-      if (widgets[i]._id === widgetId) {
-        widget = widgets[i];
-      }
-    }
     widget.url = 'uploads/' + filename;
-    // var callbackUrl = "http://localhost:3200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
-    var callbackUrl = "https://webdev-xue-jiangyang.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
-    res.redirect(callbackUrl);
+    widgetModel.updateWidget(widgetId, widget)
+      .then(function (widget) {
+        // var callbackUrl = "http://localhost:3200/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+        var callbackUrl = "https://webdev-xue-jiangyang.herokuapp.com/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/" + widgetId;
+        res.redirect(callbackUrl)
+      });
+
+    // for (var i = 0; i < widgets.length; i++) {
+    //   if (widgets[i]._id === widgetId) {
+    //     widget = widgets[i];
+    //   }
+    // }
+
+
+    ;
 
   }
 

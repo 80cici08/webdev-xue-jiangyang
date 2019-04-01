@@ -32,6 +32,7 @@
       <input type="text"
              class="form-control"
              id="text-rows"
+             placeholder="Rows"
              [(ngModel)]="widget.rows">
     </div>
     <div class="form-group">
@@ -39,6 +40,7 @@
       <input type="text"
              class="form-control"
              id="text-placeholder"
+             placeholder="Placeholder"
              [(ngModel)]="widget.placeholder">
     </div>
 
@@ -48,7 +50,9 @@
         <input [(ngModel)]="widget.formatted" type="checkbox"/>
       </span>
     </div>
-  <a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>
+  <div class="form-group">
+    <a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>
+  </div>
 </div>
 
 <!-- Footer -->
