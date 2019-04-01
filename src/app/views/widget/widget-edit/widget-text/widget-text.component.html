@@ -11,45 +11,45 @@
 
 <!--Content-->
 <div class="container">
-    <div class="form-group">
-      <label for="text-name">Name</label>
-      <input type="text"
-             class="form-control"
-             id="text-name"
-             placeholder="Name"
-             [(ngModel)]="widget.name">
-    </div>
-    <div class="form-group">
-      <label for="text-text">Text</label>
-      <input type="text"
-             class="form-control"
-             id="text-text"
-             placeholder="Text"
-             [(ngModel)]="widget.text">
-    </div>
-    <div class="form-group">
-      <label for="text-rows">Rows</label>
-      <input type="text"
-             class="form-control"
-             id="text-rows"
-             placeholder="Rows"
-             [(ngModel)]="widget.rows">
-    </div>
-    <div class="form-group">
-      <label for="text-placeholder">Placeholder</label>
-      <input type="text"
-             class="form-control"
-             id="text-placeholder"
-             placeholder="Placeholder"
-             [(ngModel)]="widget.placeholder">
-    </div>
+  <div class="form-group">
+    <label for="text-name">Name</label>
+    <input type="text"
+           class="form-control"
+           id="text-name"
+           placeholder="Name"
+           [(ngModel)]="widget.name">
+  </div>
+  <div class="form-group">
+    <label for="text-text">Text</label>
+    <input type="text"
+           class="form-control"
+           id="text-text"
+           placeholder="Text"
+           [(ngModel)]="widget.text">
+  </div>
+  <div class="form-group">
+    <label for="text-rows">Rows</label>
+    <input type="text"
+           class="form-control"
+           id="text-rows"
+           placeholder="Rows"
+           [(ngModel)]="widget.rows">
+  </div>
+  <div class="form-group">
+    <label for="text-placeholder">Placeholder</label>
+    <input type="text"
+           class="form-control"
+           id="text-placeholder"
+           placeholder="Placeholder"
+           [(ngModel)]="widget.placeholder">
+  </div>
 
-    <div class="input-group">
-      <input type="text" readonly value="Formatted" class="form-control"/>
-      <span class="input-group-addon">
-        <input [(ngModel)]="widget.formatted" type="checkbox"/>
-      </span>
+  <div class="input-group form-group">
+    <input type="text" readonly value="Formatted" class="form-control"/>
+    <div class="input-group-append">
+      <span class="input-group-text"><input [(ngModel)]="widget.formatted" type="checkbox"/></span>
     </div>
+  </div>
   <div class="form-group">
     <a class="btn btn-danger  btn-block" (click)="deleteWidget()">Delete</a>
   </div>
