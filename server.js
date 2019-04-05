@@ -4,7 +4,18 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+
 const app = express();
+
+// loading authentication modules
+var cookieParser = require('cookie-parser');
+var session = require('express-session')
+const passport = require('passport');
+
+app.use(cookieParser());
+app.use(session({ secret: process.env.SESSION_SECRET }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // install, load, and configure body parser module
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -12,6 +23,7 @@ app.use(bodyParser.json());
 
 // Point static path to dist -- For building -- REMOVE
 app.use(express.static(path.join(__dirname, "dist/webdev-jiangyang-cs5610")));
+
 
 // CORS
 app.use(function(req, res, next) {

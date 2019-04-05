@@ -3,6 +3,7 @@ import {UserService} from '../../../services/user.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WebsiteService} from '../../../services/website.service.client';
 import {Website} from '../../../models/website.model.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-website-edit',
@@ -18,6 +19,7 @@ export class WebsiteEditComponent implements OnInit {
   errorMsg = 'Please enter website name.';
 
   constructor(private websiteService: WebsiteService,
+              private sharedService: SharedService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
     this.errorFlag = false;
@@ -25,8 +27,8 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.developerId = this.sharedService.user['_id'];
     this.activatedRoute.params.subscribe(params => {
-      this.developerId = params.uid;
       this.websiteId = params.wid;
       // const tmp: Website = this.websiteService.findWebsiteById(this.websiteId);
       // this.website = new Website(tmp._id, tmp.name, tmp.developerId, tmp.description);
@@ -54,7 +56,7 @@ export class WebsiteEditComponent implements OnInit {
       this.websiteService.updateWebsite(this.websiteId, this.website)
         .subscribe(
           data => {
-            this.router.navigate(['/user', this.developerId, 'website']);
+            this.router.navigate(['website']);
           }
         );
     }
@@ -64,7 +66,7 @@ export class WebsiteEditComponent implements OnInit {
     this.websiteService.deleteWebsite(this.websiteId)
       .subscribe(
         data => {
-          this.router.navigate(['/user', this.developerId, 'website']);
+          this.router.navigate(['website']);
         },
         error => {
           console.log(error);

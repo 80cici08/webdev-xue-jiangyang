@@ -3,6 +3,7 @@ import {WebsiteService} from '../../../services/website.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
 import {Website} from '../../../models/website.model.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-website-new',
@@ -22,12 +23,11 @@ export class WebsiteNewComponent implements OnInit {
 
   constructor(private websiteService: WebsiteService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) { this.errorFlag = false; }
+              private activatedRoute: ActivatedRoute,
+              private sharedService: SharedService) { this.errorFlag = false; }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      this.developerId = params.uid;
-    });
+    this.developerId = this.sharedService.user['_id'];
     this.websiteService.findWebsiteByUser(this.developerId)
       .subscribe(
         (data: Website[]) => {
@@ -47,7 +47,7 @@ export class WebsiteNewComponent implements OnInit {
       this.websiteService.createWebsite(this.developerId, website)
         .subscribe(
           data => {
-            this.router.navigate(['user', this.developerId, 'website']);
+            this.router.navigate(['website']);
           }
         );
     }

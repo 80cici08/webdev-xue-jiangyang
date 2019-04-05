@@ -27,6 +27,7 @@ import {UserService} from './services/user.service.client';
 import {WebsiteService} from './services/website.service.client';
 import {PageService} from './services/page.service.client';
 import {WidgetService} from './services/widget.service.client';
+import {SharedService} from './services/shared.service';
 import { ChangeBgColorDirective } from './directives/change-bg-color.directive';
 import {SortableDirective} from './directives/sortable.directive';
 import { FlickrImageSearchComponent } from './views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
@@ -34,7 +35,7 @@ import {FlickrService} from './services/flickr.service.client';
 import { WidgetHtmlComponent } from './views/widget/widget-edit/widget-html/widget-html.component';
 import { QuillEditorModule } from 'ngx-quill-editor';
 import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widget-text.component';
-
+import {AuthGuard} from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { WidgetTextComponent } from './views/widget/widget-edit/widget-text/widg
     HttpClientModule,
     QuillEditorModule
   ],
-  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService],
+  providers: [UserService, WebsiteService, PageService, WidgetService, FlickrService, SharedService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

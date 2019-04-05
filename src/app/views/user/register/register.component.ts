@@ -33,16 +33,22 @@ export class RegisterComponent implements OnInit {
       this.errorFlag = true;
     } else {
       this.errorFlag = false;
-      this.userService.createUser(this.user)
-        .subscribe(
-          data => {
-            this.user = data;
-            this.router.navigate(['/user', this.user._id]);
-          },
-          error => {
-            this.errorFlag = true;
-          },
-        );
+      this.userService.register(this.user.username, this.user.password)
+        .subscribe((data: any) => {
+        this.router.navigate(['/profile']);
+      }, (error: any) => {
+        this.errorMsg = error._body;
+      });
+      // this.userService.createUser(this.user)
+      //   .subscribe(
+      //     data => {
+      //       this.user = data;
+      //       this.router.navigate(['/user', this.user._id]);
+      //     },
+      //     error => {
+      //       this.errorFlag = true;
+      //     },
+      //   );
     }
   }
 }

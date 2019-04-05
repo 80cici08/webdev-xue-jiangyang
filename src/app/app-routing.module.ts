@@ -13,24 +13,24 @@ import {WidgetListComponent} from './views/widget/widget-list/widget-list.compon
 import {WidgetChooserComponent} from './views/widget/widget-chooser/widget-chooser.component';
 import {WidgetEditComponent} from './views/widget/widget-edit/widget-edit.component';
 import {FlickrImageSearchComponent} from './views/widget/widget-edit/widget-image/flickr-image-search/flickr-image-search.component';
-
-import {ChangeBgColorDirective} from './directives/change-bg-color.directive';
+// import {ChangeBgColorDirective} from './directives/change-bg-color.directive';
+import {AuthGuard} from './services/auth-guard.service';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'user/:uid', component: ProfileComponent},
-  {path: 'user/:uid/website', component: WebsiteListComponent},
-  {path: 'user/:uid/website/new', component: WebsiteNewComponent},
-  {path: 'user/:uid/website/:wid', component: WebsiteEditComponent},
-  {path: 'user/:uid/website/:wid/page', component: PageListComponent},
-  {path: 'user/:uid/website/:wid/page/new', component: PageNewComponent},
-  {path: 'user/:uid/website/:wid/page/:pid', component: PageEditComponent},
-  {path: 'user/:uid/website/:wid/page/:pid/widget', component: WidgetListComponent},
-  {path: 'user/:uid/website/:wid/page/:pid/widget/new', component: WidgetChooserComponent},
-  {path: 'user/:uid/website/:wid/page/:pid/widget/:wgid', component: WidgetEditComponent},
-  {path: 'user/:uid/website/:wid/page/:pid/widget/:wgid/search', component: FlickrImageSearchComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'website', component: WebsiteListComponent, canActivate: [AuthGuard]},
+  {path: 'website/new', component: WebsiteNewComponent, canActivate: [AuthGuard]},
+  {path: 'website/:wid', component: WebsiteEditComponent, canActivate: [AuthGuard]},
+  {path: 'website/:wid/page', component: PageListComponent, canActivate: [AuthGuard]},
+  {path: 'website/:wid/page/new', component: PageNewComponent, canActivate: [AuthGuard]},
+  {path: 'website/:wid/page/:pid', component: PageEditComponent, canActivate: [AuthGuard]},
+  {path: 'website/:wid/page/:pid/widget', component: WidgetListComponent, canActivate: [AuthGuard]},
+  {path: 'website/:wid/page/:pid/widget/new', component: WidgetChooserComponent, canActivate: [AuthGuard]},
+  {path: 'website/:wid/page/:pid/widget/:wgid', component: WidgetEditComponent, canActivate: [AuthGuard]},
+  {path: 'website/:wid/page/:pid/widget/:wgid/search', component: FlickrImageSearchComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

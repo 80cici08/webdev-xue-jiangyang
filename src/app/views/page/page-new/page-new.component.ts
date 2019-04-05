@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PageService} from '../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-page-new',
@@ -16,16 +17,17 @@ export class PageNewComponent implements OnInit {
   errorMsg = 'Please enter page name.';
 
   constructor(private pageService: PageService,
+              private sharedService: SharedService,
               private router: Router,
               private activatedRoute: ActivatedRoute) { this.errorFlag = false; }
 
   ngOnInit() {
+    this.userId = this.sharedService.user['_id'];
     this.page = {
       name: '',
       description: ''
     }
     this.activatedRoute.params.subscribe(params => {
-      this.userId = params.uid;
       this.websiteId = params.wid;
     });
   }
@@ -37,7 +39,7 @@ export class PageNewComponent implements OnInit {
       this.pageService.createPage(this.websiteId, this.page)
         .subscribe(
           data => {
-            this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+            this.router.navigate(['/website', this.websiteId, 'page']);
           }
         );
     }

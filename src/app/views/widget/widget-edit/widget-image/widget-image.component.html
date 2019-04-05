@@ -1,7 +1,7 @@
 <!--Header-->
 <div class="navbar navbar-light bg-light fixed-top">
   <div class="container-fluid">
-    <a class="navbar-text" routerLink="/user/{{userId}}/website/{{websiteId}}/page/{{pageId}}/widget"><i class="fas fa-angle-left fontawsome_icon"></i></a>
+    <a class="navbar-text" routerLink="/website/{{websiteId}}/page/{{pageId}}/widget"><i class="fas fa-angle-left fontawsome_icon"></i></a>
     <a class="navbar-brand ml-2" href="javascript:void(0);"> Edit Widget</a>
     <a class="navbar-text ml-auto" (click)="updateWidget()" href="javascript:void(0);"><i class="fas fa-check fontawsome_icon"></i></a>
   </div>
@@ -9,6 +9,7 @@
 
 <!--Content-->
 <div class="container">
+  <div *ngIf="errorFlag" class="alert alert-danger">{{ errorMsg }}</div>
   <form>
     <div class="form-group">
       <label for="image-name">Name</label>
@@ -17,8 +18,12 @@
              id="image-name"
              name="name"
              placeholder="Name"
-             [(ngModel)]="widget.name">
+             [(ngModel)]="widget.name" required #widgetName="ngModel">
     </div>
+    <small class="form-text text-danger" *ngIf="!widgetName.valid && widgetName.touched">
+      Please enter widget name.
+    </small>
+
     <div class="form-group">
       <label for="image-text">Text</label>
       <input type="text"
@@ -71,6 +76,6 @@
 <!-- Footer -->
 <div class="navbar navbar-light bg-light fixed-bottom">
   <div class="container-fluid">
-    <a class="navbar-text ml-auto" routerLink="/user/{{userId}}"><i class="fas fa-user fontawsome_icon"></i></a>
+    <a class="navbar-text ml-auto" routerLink="/profile"><i class="fas fa-user fontawsome_icon"></i></a>
   </div>
 </div>

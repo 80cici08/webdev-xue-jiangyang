@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../services/user.service.client';
 import {NgForm} from '@angular/forms';
 import {User} from '../../../models/user.model.client';
+import {SharedService} from '../../../services/shared.service';
 
 
 @Component({
@@ -15,31 +16,40 @@ export class ProfileComponent implements OnInit {
   errorFlag: boolean;
   errorMsg = 'Invalid input, please check!';
 
-  user: User;
-  userId: String;
+  user: any;
   @ViewChild('f') profileForm: NgForm;
 
   constructor(private userService: UserService,
               private activatedRouter: ActivatedRoute,
+              private sharedService: SharedService,
               private router: Router) {
     this.errorFlag = false;
-    this.user = new User('alice', 'alice', 'alice', 'alice', 'alice@alice');
   }
 
   ngOnInit() {
-    this.activatedRouter.params.subscribe(params => {
-      this.userId = params['uid'];
-      this.userService.findUserById(this.userId)
-        .subscribe(
-          (data: User) => {
-          this.user = data;
-        });
-    });
+    this.user = this.sharedService.user;
+    // this.activatedRouter.params.subscribe(params => {
+    //   this.userId = params['uid'];
+    //   this.userService.findUserById(this.userId)
+    //     .subscribe(
+    //       (data: User) => {
+    //       this.user = data;
+    //     });
+    // });
+  }
+
+  logout() {
+    this.userService.logout()
+      .subscribe(
+        (data:  any) => {
+          this.router.navigate(['/login']);
+        }
+      );
   }
 
   onUpdate() {
     if (!!this.profileForm.valid) {
-      this.userService.updateUser(this.userId, this.user)
+      this.userService.updateUser(this.user._id, this.user)
         .subscribe(
           data => {
             this.user = data;
@@ -55,7 +65,7 @@ export class ProfileComponent implements OnInit {
 
   onGoToWebsites() {
     this.onUpdate();
-    this.router.navigate(['/user', this.user._id, 'website']);
+    this.router.navigate(['/website']);
   }
 
 }

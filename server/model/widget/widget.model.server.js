@@ -52,10 +52,12 @@ function updateWidget(widgetId, widget) {
 function deleteWidget(widgetId) {
   return widgetModel.findOneAndDelete({_id: widgetId})
     .then(function (responseWidget) {
-      pageModel.findPageById({_id: responseWidget._page}).then(function (page) {
-        page.widgets.pull({_id: widgetId});
-        page.save();
+      pageModel.findPageById({_id: responseWidget._page})
+        .then(function (page) {
+          page.widgets.pull({_id: widgetId});
+          page.save();
       })
+      return responseWidget;
     });
 }
 

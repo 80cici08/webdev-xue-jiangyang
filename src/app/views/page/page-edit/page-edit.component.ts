@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PageService} from '../../../services/page.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Page} from '../../../models/page.model.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-page-edit',
@@ -17,6 +18,7 @@ export class PageEditComponent implements OnInit {
   errorMsg = 'Please enter page name.';
 
   constructor(private pageService: PageService,
+              private sharedService: SharedService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
     this.errorFlag = false;
@@ -24,8 +26,8 @@ export class PageEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userId = this.sharedService.user['_id'];
     this.activatedRoute.params.subscribe(params => {
-      this.userId = params.uid;
       this.websiteId = params.wid;
       this.pageId = params.pid;
     });
@@ -44,7 +46,7 @@ export class PageEditComponent implements OnInit {
     this.pageService.deletePage(this.pageId)
       .subscribe(
         data => {
-          this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+          this.router.navigate(['/website', this.websiteId, 'page']);
         }
       );
   }
@@ -56,7 +58,7 @@ export class PageEditComponent implements OnInit {
       this.pageService.updatePage(this.pageId, this.page)
         .subscribe(
           (data: Page) => {
-            this.router.navigate(['/user', this.userId, 'website', this.websiteId, 'page']);
+            this.router.navigate(['/website', this.websiteId, 'page']);
           }
         );
     }

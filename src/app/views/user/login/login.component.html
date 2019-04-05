@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h2>Assignment 5 -Jiangyang Xue</h2>
+  <h2>Assignment 6 -Jiangyang Xue</h2>
   <hr>
   <h2>Login Form</h2>
   <div *ngIf="errorFlag" class="alert alert-danger">{{ errorMsg }}</div>
@@ -32,6 +32,13 @@
 
     <div class="form-group">
       <button [disabled]="!f.valid" class="btn btn-primary btn-block" type="submit">Login</button>
+    </div>
+
+
+    <div class="form-group">
+      <a href="/facebook/login" class="btn btn-primary btn-block">
+        <span class="fab fa-facebook"></span> Facebook
+      </a>
     </div>
 
     <div class="form-group">

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FlickrService} from '../../../../../services/flickr.service.client';
 import {WidgetService} from '../../../../../services/widget.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
+import {SharedService} from '../../../../../services/shared.service';
 
 @Component({
   selector: 'app-flickr-image-search',
@@ -20,13 +21,14 @@ export class FlickrImageSearchComponent implements OnInit {
 
   constructor(private _flickrService: FlickrService,
               private widgetService: WidgetService,
+              private sharedService: SharedService,
               private router: Router,
               private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.userId = this.sharedService.user['_id'];
     this.activatedRoute.params.subscribe(params => {
-      this.userId = params.uid;
       this.websiteId = params.wid;
       this.pageId = params.pid;
       this.widgetId = params.wgid;
@@ -54,7 +56,7 @@ export class FlickrImageSearchComponent implements OnInit {
       .updateWidget(this.widgetId, widget)
       .subscribe(
         (data: any) => {
-          if (data) { this.router.navigate(['/user/' + this.userId + '/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + this.widgetId] );
+          if (data) { this.router.navigate(['/website/' + this.websiteId + '/page/' + this.pageId + '/widget/' + this.widgetId] );
           } else {
             this.error = 'failed!';
           }

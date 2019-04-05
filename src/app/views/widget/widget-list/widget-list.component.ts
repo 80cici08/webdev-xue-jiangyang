@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import {Widget} from '../../../models/widget.model.client';
 import {PageService} from '../../../services/page.service.client';
+import {SharedService} from '../../../services/shared.service';
 
 @Component({
   selector: 'app-widget-list',
@@ -18,13 +19,14 @@ export class WidgetListComponent implements OnInit {
 
   constructor(private widgetService: WidgetService,
               private pageService: PageService,
+              private sharedService: SharedService,
               private router: Router,
               private activatedRoute: ActivatedRoute,
               public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    this.userId = this.sharedService.user['_id'];
     this.activatedRoute.params.subscribe(params => {
-      this.userId = params.uid;
       this.websiteId = params.wid;
       this.pageId = params.pid;
     });

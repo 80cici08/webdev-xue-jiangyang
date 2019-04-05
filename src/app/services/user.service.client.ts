@@ -1,23 +1,21 @@
 import {Injectable} from '@angular/core';
 import {User} from '../models/user.model.client';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-
+import {SharedService} from './shared.service';
+import {Router} from '@angular/router';
+import {catchError, map} from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
 
   baseUrl = environment.baseUrl;
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient,
+              private sharedService: SharedService,
+              private router: Router) {
   }
 
-  // users: User[] = [
-  //   new User('123', 'alice', 'alice', 'Alice', 'Wonder', ''),
-  //   new User('234', 'bob', 'bob', 'Bob', 'Marley', ''),
-  //   new User('345', 'charly', 'charly', 'Charly', 'Garcia', ''),
-  //   new User('456', 'jannunzi', 'jannunzi', 'Jose', 'Annunzi', ''),
-  // ];
 
   createUser(user) {
     return this._http.post<User>(this.baseUrl + '/api/user/', user);
@@ -32,7 +30,6 @@ export class UserService {
   }
 
   findUserByCredentials(username, password) {
-    console.log('baseUrl:' + this.baseUrl);
     return this._http.get<User>(this.baseUrl + '/api/user?username=' + username + '&password=' + password);
   }
 
@@ -43,4 +40,35 @@ export class UserService {
   deleteUser(userId) {
     return this._http.delete(this.baseUrl + '/api/user/' + userId);
   }
+
+  login(username: String, password: String) {
+    const body = {username: username, password: password};
+    return this._http.post(this.baseUrl + '/api/login', body, {'withCredentials': true});
+  }
+
+  logout() {
+    return this._http.post(this.baseUrl + '/api/logout', '', {'withCredentials': true});
+  }
+
+  register(username: String, password: String) {
+    const user = {username: username, password: password};
+    return this._http.post(this.baseUrl + '/api/register', user, {'withCredentials': true});
+  }
+
+  loggedIn() {
+    return this._http.post(this.baseUrl + '/api/loggedin', '', {'withCredentials': true})
+      .pipe(
+        map((data: any) => {
+          const user = data;
+          if (user !== 0) {
+            this.sharedService.user = user; // setting user as global variable using shared service
+            return true;
+          } else {
+            this.router.navigate(['/login']);
+            return false;
+          }
+        }),
+        );
+  }
+
 }
