@@ -42,6 +42,7 @@ export class ProfileComponent implements OnInit {
     this.userService.logout()
       .subscribe(
         (data:  any) => {
+          this.sharedService.user = '';
           this.router.navigate(['/login']);
         }
       );
