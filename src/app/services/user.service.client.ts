@@ -59,10 +59,11 @@ export class UserService {
     return this._http.post(this.baseUrl + '/api/loggedin', '', {'withCredentials': true})
       .pipe(
         map((data: any) => {
-          const user = data;
+          const user = JSON.stringify(data);
           console.log('loggedIn');
           console.log(user);
-          if (user !== 0) {
+
+          if (user !== '0') {
             this.sharedService.user = user; // setting user as global variable using shared service
             return true;
           } else {

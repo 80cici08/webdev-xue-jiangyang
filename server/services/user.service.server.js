@@ -189,6 +189,7 @@ module.exports = function (app) {
 
   function logout(req, res) {
     req.logOut();
+    console.log('logged out...');
     res.send(200);
   }
 
