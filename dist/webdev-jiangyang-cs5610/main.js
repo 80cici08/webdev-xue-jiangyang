@@ -717,10 +717,10 @@ var UserService = /** @class */ (function () {
         var _this = this;
         return this._http.post(this.baseUrl + '/api/loggedin', '', { 'withCredentials': true })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
-            var user = JSON.stringify(data);
+            var user = data;
             console.log('loggedIn');
             console.log(user);
-            if (user !== '0') {
+            if (user !== 0) {
                 _this.sharedService.user = user; // setting user as global variable using shared service
                 return true;
             }
@@ -1249,7 +1249,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = " <div class=\"navbar navbar-dark cl-blue-navbar fixed-top\">\n  <div class=\"container-fluid\">\n    <a class=\"navbar-brand\" href=\"javascript:void(0);\">Profile</a>\n    <a (click)=\"onUpdate()\" href=\"javascript:void(0);\" class=\"navbar-text ml-auto\" ><i class=\"fas fa-check fontawsome_icon cl-text-white\"></i></a>\n  </div>\n</div>\n\n\n<div class=\"container\">\n  <div *ngIf=\"errorFlag\" class=\"alert alert-danger\">{{ errorMsg }}</div>\n  <form (ngSubmit)=\"onGoToWebsites()\" #f=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"username\">Username</label>\n      <input class=\"form-control\"\n             [class.is-invalid]=\"!username.valid && username.touched\"\n             type=\"text\"\n             id=\"username\"\n             name=\"username\"\n             placeholder=\"Username\"\n             [(ngModel)]=\"user.username\"\n             required #username=\"ngModel\">\n    <small class=\"form-text text-danger\" *ngIf=\"!username.valid && username.touched\">\n      Please enter username.\n    </small>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"email\">Email address</label>\n      <input class=\"form-control\"\n             [class.is-invalid]=\"!email.valid && email.touched\"\n             type=\"email\"\n             id=\"email\"\n             name=\"email\"\n             placeholder=\"sample@google.com\"\n             [(ngModel)]=\"user.email\"\n             email #email=\"ngModel\">\n    <small class=\"form-text text-danger\" *ngIf=\"!email.valid && email.touched\">\n      Please enter correct email.\n    </small>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"firstname\">First Name</label>\n      <input [(ngModel)]=\"user.firstName\"\n             class=\"form-control\"\n             type=\"text\"\n             id=\"firstname\"\n             name=\"firstname\"\n             placeholder=\"FirstName\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"lastname\">Last Name</label>\n      <input [(ngModel)]=\"user.lastName\"\n             class=\"form-control\"\n             type=\"text\"\n             id=\"lastname\"\n             name=\"lastname\"\n             placeholder=\"LastName\">\n    </div>\n    <div class=\"form-group\">\n      <button [disabled]=\"!f.valid\" class=\"btn btn-primary btn-block\" type=\"submit\">Websites</button>\n    </div>\n    <div class=\"form-group\">\n      <button class=\"btn btn-danger btn-block\" routerLink=\"/login\">Logout</button>\n    </div>\n  </form>\n</div>\n\n\n<div class=\"navbar navbar-dark cl-blue-navbar fixed-bottom\">\n  <div class=\"container-fluid\">\n    <a class=\"navbar-text ml-auto\" routerLink=\"/profile\"><i class=\"fas fa-user fontawsome_icon\"></i></a>\n  </div>\n</div>\n"
+module.exports = " <div class=\"navbar navbar-dark cl-blue-navbar fixed-top\">\n  <div class=\"container-fluid\">\n    <a class=\"navbar-brand\" href=\"javascript:void(0);\">Profile</a>\n    <a (click)=\"onUpdate()\" href=\"javascript:void(0);\" class=\"navbar-text ml-auto\" ><i class=\"fas fa-check fontawsome_icon cl-text-white\"></i></a>\n  </div>\n</div>\n\n\n<div class=\"container\">\n  <div *ngIf=\"errorFlag\" class=\"alert alert-danger\">{{ errorMsg }}</div>\n  <form (ngSubmit)=\"onGoToWebsites()\" #f=\"ngForm\">\n    <div class=\"form-group\">\n      <label for=\"username\">Username</label>\n      <input class=\"form-control\"\n             [class.is-invalid]=\"!username.valid && username.touched\"\n             type=\"text\"\n             id=\"username\"\n             name=\"username\"\n             placeholder=\"Username\"\n             [(ngModel)]=\"user.username\"\n             required #username=\"ngModel\">\n    <small class=\"form-text text-danger\" *ngIf=\"!username.valid && username.touched\">\n      Please enter username.\n    </small>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"email\">Email address</label>\n      <input class=\"form-control\"\n             [class.is-invalid]=\"!email.valid && email.touched\"\n             type=\"email\"\n             id=\"email\"\n             name=\"email\"\n             placeholder=\"sample@google.com\"\n             [(ngModel)]=\"user.email\"\n             email #email=\"ngModel\">\n    <small class=\"form-text text-danger\" *ngIf=\"!email.valid && email.touched\">\n      Please enter correct email.\n    </small>\n    </div>\n\n    <div class=\"form-group\">\n      <label for=\"firstname\">First Name</label>\n      <input [(ngModel)]=\"user.firstName\"\n             class=\"form-control\"\n             type=\"text\"\n             id=\"firstname\"\n             name=\"firstname\"\n             placeholder=\"FirstName\">\n    </div>\n    <div class=\"form-group\">\n      <label for=\"lastname\">Last Name</label>\n      <input [(ngModel)]=\"user.lastName\"\n             class=\"form-control\"\n             type=\"text\"\n             id=\"lastname\"\n             name=\"lastname\"\n             placeholder=\"LastName\">\n    </div>\n    <div class=\"form-group\">\n      <button [disabled]=\"!f.valid\" class=\"btn btn-primary btn-block\" type=\"submit\">Websites</button>\n    </div>\n  </form>\n  <a (click)=\"logout()\" class=\"btn btn-danger btn-block\">Logout</a>\n</div>\n\n\n<div class=\"navbar navbar-dark cl-blue-navbar fixed-bottom\">\n  <div class=\"container-fluid\">\n    <a class=\"navbar-text ml-auto\" routerLink=\"/profile\"><i class=\"fas fa-user fontawsome_icon\"></i></a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1299,8 +1299,10 @@ var ProfileComponent = /** @class */ (function () {
         var _this = this;
         this.userService.logout()
             .subscribe(function (data) {
-            _this.user = null;
             _this.router.navigate(['/login']);
+        }, function (error) {
+            console.log('logout fail...');
+            console.log(error);
         });
     };
     ProfileComponent.prototype.onUpdate = function () {
