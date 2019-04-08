@@ -60,6 +60,8 @@ export class UserService {
       .pipe(
         map((data: any) => {
           const user = data;
+          console.log('loggedIn');
+          console.log(user);
           if (user !== 0) {
             this.sharedService.user = user; // setting user as global variable using shared service
             return true;

@@ -718,6 +718,8 @@ var UserService = /** @class */ (function () {
         return this._http.post(this.baseUrl + '/api/loggedin', '', { 'withCredentials': true })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
             var user = data;
+            console.log('loggedIn');
+            console.log(user);
             if (user !== 0) {
                 _this.sharedService.user = user; // setting user as global variable using shared service
                 return true;
@@ -1297,6 +1299,7 @@ var ProfileComponent = /** @class */ (function () {
         var _this = this;
         this.userService.logout()
             .subscribe(function (data) {
+            _this.sharedService.user = '';
             _this.router.navigate(['/login']);
         });
     };
